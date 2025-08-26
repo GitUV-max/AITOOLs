@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AITOOLS - Master Artificial Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Razorpay Checkout Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-bg {
+            background-color: #f8fafc;
+        }
+        .course-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        /* Simple spinner animation */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #09f;
+            animation: spin 1s ease infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-600">AITOOLS</a>
+            <nav class="hidden md:flex space-x-6 items-center">
+                <a href="#courses" class="text-gray-600 hover:text-blue-600">Courses</a>
+                {% if 'user_id' in session %}
+                    <a href="{{ url_for('dashboard') }}" class="text-gray-600 hover:text-blue-600">Dashboard</a>
+                    <a href="{{ url_for('logout') }}" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 transition duration-300">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="text-gray-600 hover:text-blue-600">Login</a>
+                    <a href="{{ url_for('register') }}" class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-full hover:bg-blue-700 transition duration-300">Register</a>
+                {% endif %}
+            </nav>
+            <button class="md:hidden text-gray-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+    </header>
+
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-4">Master the Tools of Artificial Intelligence</h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-6">Get our All-in-One Master Course and learn everything you need to launch your AI career.</p>
+                <div class="mb-8">
+                    <span class="text-2xl md:text-3xl text-gray-500 line-through">₹4599</span>
+                    <span class="text-4xl md:text-5xl font-bold text-green-600 ml-4">₹999</span>
+                    <span class="block text-lg text-gray-600 mt-2">Limited Time Offer!</span>
+                </div>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button class="buy-btn bg-green-500 text-white font-semibold px-10 py-4 rounded-full hover:bg-green-600 transition duration-300 text-xl" data-course-id="master">Buy The Master Course</button>
+                    <a href="#courses" class="text-blue-600 font-semibold hover:underline">Or Explore Individual Courses</a>
+                </div>
+            </div>
+        </section>
+
+
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Courses Section -->
+        <section id="courses" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">Our Flagship Courses</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    
+                    <!-- Course Card 1: Python -->
+                    <div class="course-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/3B82F6/FFFFFF?text=Python+for+AI" alt="Python Course" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Python for AI & ML</h3>
+                            <p class="text-sm font-medium text-blue-600 mb-3">Duration: 6+ Hours</p>
+                            <p class="course-description text-gray-600 text-base mb-4 flex-grow">Build a solid foundation in Python, the language of choice for AI and Data Science.</p>
+                            <div class="mt-auto space-y-3">
+                                <button class="preview-btn w-full bg-gray-200 text-gray-800 font-semibold px-6 py-2 rounded-full hover:bg-gray-300 transition duration-300" data-course-id="python">Explore</button>
+                                <div class="text-center pt-2">
+                                    <span class="inline-block bg-slate-300 text-slate-600 font-bold text-sm px-4 py-2 rounded-full">Coming Soon</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Course Card 2: ML -->
+                    <div class="course-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/10B981/FFFFFF?text=Machine+Learning" alt="ML Course" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Machine Learning in Depth</h3>
+                            <p class="text-sm font-medium text-blue-600 mb-3">Duration: 6+ Hours</p>
+                            <p class="course-description text-gray-600 text-base mb-4 flex-grow">Master algorithms, from linear regression to complex classification models.</p>
+                            <div class="mt-auto space-y-3">
+                                <button class="preview-btn w-full bg-gray-200 text-gray-800 font-semibold px-6 py-2 rounded-full hover:bg-gray-300 transition duration-300" data-course-id="ml">Explore</button>
+                                <div class="text-center pt-2">
+                                    <span class="inline-block bg-slate-300 text-slate-600 font-bold text-sm px-4 py-2 rounded-full">Coming Soon</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Course Card 3: NLP+DL -->
+                    <div class="course-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/8B5CF6/FFFFFF?text=NLP+%26+DL" alt="NLP/DL Course" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">NLP & Deep Learning</h3>
+                            <p class="text-sm font-medium text-blue-600 mb-3">Duration: 6+ Hours</p>
+                            <p class="course-description text-gray-600 text-base mb-4 flex-grow">Understand how machines process language with neural networks and transformers.</p>
+                            <div class="mt-auto space-y-3">
+                                <button class="preview-btn w-full bg-gray-200 text-gray-800 font-semibold px-6 py-2 rounded-full hover:bg-gray-300 transition duration-300" data-course-id="nlp-dl">Explore</button>
+                                <div class="text-center pt-2">
+                                    <span class="inline-block bg-slate-300 text-slate-600 font-bold text-sm px-4 py-2 rounded-full">Coming Soon</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Course Card 4: Gen AI -->
+                    <div class="course-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/F59E0B/FFFFFF?text=Generative+AI" alt="Gen AI Course" class="w-full h-48 object-cover">
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Generative AI Mastery</h3>
+                            <p class="text-sm font-medium text-blue-600 mb-3">Duration: 13+ Hours</p>
+                            <p class="course-description text-gray-600 text-base mb-4 flex-grow">Dive deep into LLMs, prompt engineering, and building generative applications.</p>
+                            <div class="mt-auto space-y-3">
+                                <button class="preview-btn w-full bg-gray-200 text-gray-800 font-semibold px-6 py-2 rounded-full hover:bg-gray-300 transition duration-300" data-course-id="gen-ai">Explore</button>
+                                <div class="text-center pt-2">
+                                    <span class="inline-block bg-slate-300 text-slate-600 font-bold text-sm px-4 py-2 rounded-full">Coming Soon</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 AITOOLS. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- JavaScript for Payment and Gemini API Logic -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchApiKey(); // Fetch the key as soon as the page is ready
+
+        // --- Modal Elements ---
+        const modal = document.getElementById('messageModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMessage = document.getElementById('modalMessage');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const modalLoader = document.getElementById('modalLoader');
+
+
+        // --- Course Buttons ---
+        const buyButtons = document.querySelectorAll('.buy-btn');
+        const previewButtons = document.querySelectorAll('.preview-btn');
+
+
+        // --- Modal Logic ---
+        const showModal = (title, message, isSuccess = null) => {
+            modalTitle.textContent = title;
+            modalMessage.innerHTML = message; // Use innerHTML to render formatted text
+            
+            if (isSuccess === true) {
+                modalTitle.className = 'text-2xl font-bold mb-4 text-green-500';
+            } else if (isSuccess === false) {
+                modalTitle.className = 'text-2xl font-bold mb-4 text-red-500';
+            } else {
+                modalTitle.className = 'text-2xl font-bold mb-4 text-gray-900';
+            }
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modalLoader.classList.add('hidden');
+            modalMessage.classList.remove('hidden');
+            modalCloseBtn.classList.remove('hidden');
+        };
+
+
+        const showModalLoading = (title) => {
+            modalTitle.textContent = title;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modalMessage.classList.add('hidden');
+            modalLoader.classList.remove('hidden');
+            modalCloseBtn.classList.add('hidden');
+        };
+
+
+        modalCloseBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        });
+
+
+        previewButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const courseCard = button.closest('.course-card');
+                const courseName = courseCard.querySelector('h3').textContent;
+                const courseDescription = courseCard.querySelector('.course-description').textContent;
+
+
+                showModalLoading(`Generating Preview for ${courseName}`);
+
+
+                try {
+                    const previewText = await callGeminiForPreview(courseName, courseDescription);
+                    showModal(`Preview: ${courseName}`, previewText);
+                } catch (error) {
+                    console.error('Error generating preview:', error);
+                    showModal('Error', 'Could not generate a preview at this time.', false);
+                }
+            });
+        });
+
+
+        // --- Razorpay Payment Logic ---
+        buyButtons.forEach(button => {
+            button.addEventListener('click', async () => {
+                const courseId = button.dataset.courseId;
+                const originalButtonText = button.textContent;
+                button.textContent = 'Processing...';
+                button.disabled = true;
+
+
+                try {
+                    // Step 1: Create an order on the server
+                    const orderResponse = await fetch('/create_order', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ course_id: courseId })
+                    });
+                    
+                    if (!orderResponse.ok) {
+                        throw new Error('Failed to create order.');
+                    }
+
+                    const orderDetails = await orderResponse.json();
+
+
+                    const options = {
+                        key: orderDetails.key_id,
+                        amount: orderDetails.amount,
+                        currency: orderDetails.currency,
+                        name: "AITOOLS",
+                        description: orderDetails.description,
+                        order_id: orderDetails.order_id,
+                        handler: async function (response) {
+                            // Step 3: Verify the payment on the server
+                            const verifyResponse = await fetch('/verify_payment', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    razorpay_payment_id: response.razorpay_payment_id,
+                                    razorpay_order_id: response.razorpay_order_id,
+                                    razorpay_signature: response.razorpay_signature
+                                })
+                            });
+
+                            const result = await verifyResponse.json();
+
+                            if (result.status === 'success') {
+                                showModal('Payment Successful!', `Thank you for purchasing the ${orderDetails.course_name}. You will receive access shortly.`, true);
+                            } else {
+                                showModal('Payment Failed', result.message, false);
+                            }
+                        },
+                        prefill: {
+                            name: "Valued Learner",
+                            email: "learner@aitools.com",
+                            contact: "9000090000"
+                        },
+                        notes: {
+                            course_id: courseId,
+                            purchase_date: new Date().toISOString()
+                        },
+                        theme: {
+                            color: "#3B82F6"
+                        }
+                    };
+
+
+                    const rzp1 = new Razorpay(options);
+
+
+                    rzp1.on('payment.failed', function (response) {
+                        console.error('Payment failed response:', response);
+                        showModal('Payment Failed', `Your payment could not be processed. \nReason: ${response.error.reason}`, false);
+                    });
+                    
+                    rzp1.open();
+
+
+                } catch (error) {
+                    console.error('Error during payment process:', error);
+                    showModal('An Error Occurred', 'We were unable to initiate the payment process. Please try again.', false);
+                } finally {
+                    // This timeout ensures the button text is restored after the Razorpay modal is closed
+                    setTimeout(() => {
+                        button.textContent = originalButtonText;
+                        button.disabled = false;
+                    }, 2000);
+                }
+            });
+        });
+
+
+        // --- DYNAMIC GEMINI API CALLS ---
+        let apiKey = null;
+
+        // Fetch the API key from the server when the page loads
+        async function fetchApiKey() {
+            try {
+                const response = await fetch('/get_gemini_api_key');
+                if (!response.ok) {
+                    throw new Error('Could not fetch API key from server.');
+                }
+                const data = await response.json();
+                apiKey = data.api_key;
+            } catch (error) {
+                console.error('Failed to get API key:', error);
+                showModal('Configuration Error', 'Could not retrieve the necessary API key from the server. AI features will be disabled.', false);
+            }
+        }
+
+
+
+        async function callGeminiForAdvice(userGoal) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const prompt = `You are an expert AI course advisor for a platform called AITOOLS. A potential student has this goal: "${userGoal}".
+            Our available courses are:
+            1. Python for AI & ML: Best for absolute beginners to build a solid foundation.
+            2. Machine Learning in Depth: For those who know Python and want to learn predictive modeling.
+            3. NLP & Deep Learning: Advanced course for understanding how machines process language.
+            4. Generative AI Mastery: For experienced users who want to build with LLMs.
+
+
+            Based on the student's goal, recommend ONE course. Explain your recommendation in a friendly and encouraging tone. Start with a bolded "Recommendation:" line. Format the key benefits as a bulleted list.`;
+
+
+            const payload = { contents: [{ parts: [{ text: prompt }] }] };
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error(`API call failed with status: ${response.status}`);
+            const result = await response.json();
+            return result.candidates[0].content.parts[0].text.replace(/\*/g, '•');
+        }
+        
+        async function callGeminiForPreview(courseName, courseDescription) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const prompt = `Generate a brief, exciting course preview for a course titled "${courseName}".
+            The official description is: "${courseDescription}".
+            The preview should highlight 3-4 key topics or skills the student will master.
+            Format the output as a simple, clean, bulleted list. Do not add a title or any introductory text.`;
+            
+            const payload = { contents: [{ parts: [{ text: prompt }] }] };
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error(`API call failed with status: ${response.status}`);
+            const result = await response.json();
+            return result.candidates[0].content.parts[0].text.replace(/\*/g, '•');
+        }
+    });
+    </script>
+
+
+</body>
+</html>
