@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - AITOOLS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="{{ url_for('index') }}" class="text-2xl font-bold text-gray-900">AITOOLS</a>
+            <nav class="flex items-center space-x-4">
+                <a href="{{ url_for('index') }}" class="text-gray-600 hover:text-blue-600">Courses</a>
+                <span class="text-gray-700">Welcome, {{ user.username }}!</span>
+                <a href="{{ url_for('logout') }}" class="bg-blue-600 text-white font-semibold px-4 py-2 rounded-full hover:bg-blue-700 transition duration-300">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">Your Dashboard</h1>
+
+        <div class="bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">My Courses</h2>
+            {% if user.payments|length > 0 %}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {% for payment in user.payments %}
+                        {% if payment.status == 'success' %}
+                            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                                <h3 class="text-xl font-bold text-gray-900">{{ COURSES[payment.course_id].name }}</h3>
+                                <p class="text-gray-600 mt-2">Purchased on: {{ payment.timestamp.strftime('%B %d, %Y') }}</p>
+                                <a href="#" class="mt-4 inline-block bg-green-500 text-white font-semibold px-5 py-2 rounded-full hover:bg-green-600 transition">Start Learning</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-gray-600">You haven't purchased any courses yet.</p>
+                <a href="{{ url_for('index') }}#courses" class="mt-4 inline-block bg-blue-600 text-white font-semibold px-6 py-3 rounded-full hover:bg-blue-700 transition">Explore Courses</a>
+            {% endif %}
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,6 @@
+Flask
+python-dotenv
+razorpay
+Flask-SQLAlchemy
+psycopg2-binary
+Werkzeug
